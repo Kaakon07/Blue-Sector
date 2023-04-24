@@ -318,9 +318,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6379561222784967944}
-  - component: {fileID: 2782315759094486622}
   - component: {fileID: 4350086888597566546}
   - component: {fileID: 1765338317044391673}
+  - component: {fileID: 5008458332187457054}
   m_Layer: 4
   m_Name: Ocean
   m_TagString: Untagged
@@ -348,20 +348,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2782315759094486622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2902010483727819149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b8b4083cceeca24689b15513eb02f96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ocean: {fileID: 2100000, guid: 504edb711242b7a4cb8f1d55ff3ffdec, type: 2}
-  sun: {fileID: 3657659900576157975}
 --- !u!33 &4350086888597566546
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -412,6 +398,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5008458332187457054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902010483727819149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e658e8b4da6d94cbd545ffc3537087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ocean: {fileID: 2100000, guid: 504edb711242b7a4cb8f1d55ff3ffdec, type: 2}
+  sun: {fileID: 3657659900576157975}
 --- !u!1 &5548818871028352127
 GameObject:
   m_ObjectHideFlags: 0

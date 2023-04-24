@@ -5,7 +5,6 @@ Shader "Nature/FasterOcean"
 		_BaseColor("Base color", COLOR) = (.54, .95, .99, 0.5)
 		_WaterColor("Water color", COLOR) = (.54, .95, .99, 0.5)
 		_ReflectionColor("Reflection color", COLOR) = (.54, .95, .99, 0.5)
-		[NoScaleOffset] _Foam("Foam texture", 2D) = "white" {}
 		[HideInInspector] world_light_dir("", VECTOR) = (0.0, 1.0, 0.8, 0.0)
 	}
 
@@ -16,15 +15,13 @@ Shader "Nature/FasterOcean"
 		uniform half4 _WaterColor;
 		uniform half4 _ReflectionColor;
 
-#define NB_WAVE 5
+#define NB_WAVE 3
 		half4 waves_p[NB_WAVE];
 		half4 waves_d[NB_WAVE];
 
-#define NB_INTERACTIONS 8
 #define WAVE_DURATION 4.0
 #define WAVE_SPEED 3.0
 #define MAX_WAVE_AMP 0.5
-		float4 interactions[NB_INTERACTIONS];
 
 		uniform float4 world_light_dir;
 		uniform float4 sun_color;
@@ -32,16 +29,17 @@ Shader "Nature/FasterOcean"
 #define PI 3.14159234
 
 
-		half evaluateWave(half4 wave_param, half4 wave_dir, half2 pos, float t)
+		half evaluateWave(half4 wave_param, half2 wave_dir, half2 pos, float t)
 		{
-			return wave_param.y * sin(dot(wave_dir.xy, pos) * wave_param.x + t * wave_param.z);
+			return wave_param.y * sin(dot(wave_dir, pos) * wave_param.x + t * wave_param.z);
 		}
 
 		float get_water_height(float3 p)
 		{
 			float height = 0.0;
+			const float time = _Time.y;
 			for (int i = 0; i < NB_WAVE; i++)
-				height += evaluateWave(waves_p[i], waves_d[i], p.xz, _Time.y);
+				height += evaluateWave(waves_p[i], waves_d[i].xy, p.xz, time);
 			return height;
 		}
 
@@ -139,19 +137,6 @@ Shader "Nature/FasterOcean"
 			return pow(max(dot(reflect(e, n), l), 0.0), s) * nrm;
 		}
 
-		inline void ComputeScreenAndGrabPassPos(float4 pos, out float4 screenPos, out float4 grabPassPos)
-		{
-#if UNITY_UV_STARTS_AT_TOP
-			float scale = -1.0;
-#else
-			float scale = 1.0f;
-#endif
-
-			screenPos = ComputeScreenPos(pos);
-			grabPassPos.xy = (float2(pos.x, pos.y * scale) + pos.w) * 0.5;
-			grabPassPos.zw = pos.zw;
-		}
-
 		struct appdata
 		{
 			float4 vertex : POSITION;
@@ -162,8 +147,6 @@ Shader "Nature/FasterOcean"
 			float4 pos : SV_POSITION;
 			float3 normal : NORMAL;
 			float3 world_position : TEXCOORD0;
-			float4 ref : TEXCOORD1;
-			float4 grabPassPos : TEXCOORD2;
 			UNITY_FOG_COORDS(5)
 		};
 
@@ -175,24 +158,12 @@ Shader "Nature/FasterOcean"
 			world_position.y = get_water_height(world_position.xyz);
 
 			float interactive = 0.0;
-			for (int i = 0; i < NB_INTERACTIONS; i++)
-			{
-				half dist = distance(world_position.xz, interactions[i].xy);
-				half elapsed = (_Time.y - interactions[i].w);
-				half computed_distance = elapsed * WAVE_SPEED;
-				half computed_distance_abs = abs(computed_distance - dist);
-				half power = 1.0 - saturate(computed_distance_abs * computed_distance_abs * 0.3);
-				power *= 1.0 - saturate(elapsed / WAVE_DURATION);
-				dist += 2.0;
-				interactive += power * interactions[i].z;
-			}
 			world_position.y += clamp(interactive, -MAX_WAVE_AMP, MAX_WAVE_AMP);
 
 			o.world_position = world_position;
 			o.normal = get_water_normal(world_position.xyz);
 			o.pos = mul(UNITY_MATRIX_VP, world_position);
 
-			ComputeScreenAndGrabPassPos(o.pos, o.ref, o.grabPassPos);
 			UNITY_TRANSFER_FOG(o, o.pos);
 
 			return o;
