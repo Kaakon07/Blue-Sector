@@ -541,7 +541,7 @@ PrefabInstance:
     - target: {fileID: 3105912111610639104, guid: 95fa1fd3c47aafe4ca02325a6550bb9c,
         type: 3}
       propertyPath: ElevateCameraHeight
-      value: 1.95
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3216679715088650992, guid: 95fa1fd3c47aafe4ca02325a6550bb9c,
         type: 3}
