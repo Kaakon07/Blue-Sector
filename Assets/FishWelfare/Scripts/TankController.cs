@@ -25,8 +25,8 @@ public class TankController : MonoBehaviour
         if(isGoal){
             inspectionTaskManager.ProgressInspection(other.gameObject);
         }
-        if(other.tag == "Fish"){
-            other.gameObject.GetComponent<Fish>().UpdateWaterBody(other.transform.localScale.y + other.transform.position.y, transform.position, transform.localScale.x, transform.localScale.z, true);
+        if(other.tag == "Bone"){
+            other.gameObject.GetComponent<Bone>().UpdateWaterBody(other.transform.localScale.y + other.transform.position.y, transform.position, transform.localScale.x, transform.localScale.z, true);
         }
     }
 
@@ -34,8 +34,8 @@ public class TankController : MonoBehaviour
         if(isGoal){
             inspectionTaskManager.RegressInspection(other.gameObject);
         }
-        if(other.tag == "Fish"){
-            other.gameObject.GetComponent<Fish>().UpdateWaterBody(0f, new Vector3(0f,0f,0f), 0f, 0f, false);
+        if(other.tag == "Bone"){
+            other.gameObject.GetComponent<Bone>().UpdateWaterBody(0f, new Vector3(0f,0f,0f), 0f, 0f, false);
         }
     }
 }

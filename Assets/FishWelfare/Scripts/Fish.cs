@@ -14,16 +14,16 @@ public class Fish : MonoBehaviour, IPointerClickHandler
     private int id;
     
     //The following variables are used for handeling behaviour with water
-    private Vector3 waterBodyCenter;
+    [HideInInspector]
+    public Vector3 waterBodyCenter;
     private Vector3 targetPosition;
     private Quaternion lookRotation;
     public float movementSpeed = .5f;
     public float rotationSpeed = 10;
-    private float waterBodyXLength;
-    private float waterBodyZLength;
-    private bool isInWater;
-    private bool isGrabbed = false;
-    private Rigidbody rigidBody;
+    [HideInInspector]
+    public float waterBodyXLength;
+    [HideInInspector]
+    public float waterBodyZLength;
     private Quaternion originalRotation;
 
     public BNG.UIPointer uIPointer;
@@ -43,6 +43,10 @@ public class Fish : MonoBehaviour, IPointerClickHandler
     public int health = 10;
 
     private AudioSource hurtSound;
+    [HideInInspector]
+    public int isInWaterCount = 0;
+    [HideInInspector]
+    public int isGrabbedCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +55,6 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         InvokeRepeating(nameof(PeriodicUpdates), Random.Range(0.0f, 5.0f), 1.0f);
         inspectionTaskManager = GameObject.FindObjectOfType<InspectionTaskManager>();
         targetPosition = transform.position;
-        rigidBody = GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
         liceList = FindObjectwithTag("Louse");
         hurtSound = GetComponent<AudioSource>();
@@ -62,16 +65,13 @@ public class Fish : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        if(isInWater && !isGrabbed){
-            rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            Move();
-        } else {
-            rigidBody.freezeRotation = false;
-        }
+        if(isInWaterCount > 0 && isGrabbedCount <= 0){
+            //Move();
+        } 
     }
 
     void PeriodicUpdates() {
-        if(isInWater && !isGrabbed){
+        if(isInWaterCount > 0 && isGrabbedCount <= 0){
             SetMoveTarget();    
         }
     }
@@ -83,7 +83,7 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void SetMoveTarget() {
+    public void SetMoveTarget() {
         /*
         prøv å bruke posisjonen kun til hvor den skal rotere, deretter bare beveg den fremmover. Virker som den blir litt spastic av setMoveTarget i on collision og...
         */
@@ -91,15 +91,8 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         float randX = Random.Range(waterBodyCenter.x -waterBodyXLength / 2,waterBodyCenter.x + waterBodyXLength / 2);
         float randZ = Random.Range(waterBodyCenter.z -waterBodyZLength / 2,waterBodyCenter.z + waterBodyZLength / 2);
         targetPosition = new Vector3(randX, transform.position.y, randZ);
+        Debug.Log("Position: " + targetPosition);
         lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
-    }
-
-    public void UpdateWaterBody(float waterheight, Vector3 bodyCenter, float xLength, float zLength, bool isInWater){
-        gameObject.GetComponent<Floating>().waterHeight = waterheight;
-        waterBodyCenter = bodyCenter;
-        waterBodyXLength = xLength;
-        waterBodyZLength = zLength;
-        this.isInWater = isInWater;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -129,7 +122,7 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         if (hittingWater) {
             damageThreshold = 4f;
         }
-        else if(isGrabbed){
+        else if(isGrabbedCount > 0){
             damageThreshold = 0.4f;
         }
         if(velocity > damageThreshold) {
@@ -155,14 +148,6 @@ public class Fish : MonoBehaviour, IPointerClickHandler
 
     public void SetgillDamageGuessed(int guess) {
         gillDamageGuessed = guess;
-    }
-
-    public void SetIsInWater( bool isInWater) {
-        this.isInWater = isInWater;
-    }
-
-    public void SetIsGrabbed( bool isGrabbed) {
-        this.isGrabbed = isGrabbed;
     }
 
     public int GetGillDamage() {
