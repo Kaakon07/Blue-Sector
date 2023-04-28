@@ -26,7 +26,7 @@ public class TankController : MonoBehaviour
             inspectionTaskManager.ProgressInspection(other.gameObject);
         }
         if(other.tag == "Bone"){
-            other.gameObject.GetComponent<Bone>().UpdateWaterBody(other.transform.localScale.y + other.transform.position.y, transform.position, transform.localScale.x, transform.localScale.z, true);
+            other.gameObject.GetComponent<Bone>().UpdateWaterBody(transform.position.y, transform.position, transform.localScale.x, transform.localScale.z, true);
         }
     }
 

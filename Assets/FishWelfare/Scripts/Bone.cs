@@ -19,33 +19,37 @@ public class Bone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isInWater && !isGrabbed){
+       /* if(isInWater && !isGrabbed){
             rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         } else {
             rigidBody.freezeRotation = false;
-        }
+        }*/
     }
 
     public void UpdateWaterBody(float waterheight, Vector3 bodyCenter, float xLength, float zLength, bool isInWater){
-        gameObject.GetComponent<Floating>().waterHeight = waterheight;
+       /* gameObject.GetComponent<Floating>().waterHeight = waterheight;
         parent.waterBodyCenter = bodyCenter;
         parent.waterBodyXLength = xLength;
-        parent.waterBodyZLength = zLength;
+        parent.waterBodyZLength = zLength;*/
         SetIsInWater(isInWater);
+        parent.waterHeight = waterheight;
+        Debug.Log(waterheight);
     }
 
     private void OnCollisionEnter(Collision other) {
-        parent.SetMoveTarget();
+        //parent.SetMoveTarget();
     }
 
     public void SetIsInWater(bool isInWater) {
-        this.isInWater = isInWater;
-        if (isInWater) parent.isInWaterCount++;
-        else parent.isInWaterCount--;
+        if (isInWater){
+            parent.isInWaterCount++;
+        } 
+        else {
+            parent.isInWaterCount--;
+        }
     }
 
     public void SetIsGrabbed(bool isGrabbed) {
-        this.isGrabbed = isGrabbed;
         if (isGrabbed) parent.isGrabbedCount++;
         else parent.isGrabbedCount--;
     }
