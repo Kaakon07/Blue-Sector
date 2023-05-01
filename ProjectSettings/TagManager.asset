@@ -18,6 +18,7 @@ TagManager:
   - Louse
   - YrkesTitle
   - Pointer
+  - Bone
   layers:
   - Default
   - TransparentFX

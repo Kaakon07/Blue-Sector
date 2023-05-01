@@ -63,17 +63,18 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         originalRotation = transform.rotation;
         liceList = FindObjectwithTag("Louse");
         boneList = FindObjectwithTag("Bone");
+        Debug.Log("number of bones: " + boneList.Count);
         hurtSound = GetComponent<AudioSource>();
         //The point from which the raycast targeting lice on fishbodie will have its origin. In this case it is RightHandPointer in XR Rig Advanced
         pointerFinger = GameObject.FindGameObjectWithTag("Pointer");
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(isInWaterCount > 0 && isGrabbedCount <= 0){
-            Move();
+            //Move();
         } 
         else {
             //Stop();
@@ -87,15 +88,19 @@ public class Fish : MonoBehaviour, IPointerClickHandler
     }
 
     private void Move() {
-        transform.position = new Vector3(transform.position.x, 1.53f, transform.position.z);//Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, waterHeight / 2, transform.position.z), movementSpeed * Time.deltaTime);
         if(!kinematicBones) {
             foreach( GameObject bone in boneList) {
                 bone.GetComponent<Rigidbody>().isKinematic = true;
                 bone.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 kinematicBones = true;
-                animator.enabled = true;
+                //animator.enabled = true;
+                //animator.SetBool("Swimming", true);
             }
-        }       /* if( Vector3.Distance(transform.position, targetPosition) > .1 ) {
+        }
+        //Debug.Log("Y-posisjon: " + transform.position.y);
+        transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);//Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, waterHeight / 2, transform.position.z), movementSpeed * Time.deltaTime);
+
+              /* if( Vector3.Distance(transform.position, targetPosition) > .1 ) {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
         }
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
