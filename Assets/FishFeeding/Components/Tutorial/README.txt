@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a37a78721552afb4179fdab2801e12a2cb571dde9317113411d884e76b209f0e
-size 576
+Basic spec:
+
+// A sequence of tutorial entries which are completed in order.
+// The tutorial can be activated by using an area of effect, or some other trigger.
+Tutorial:
+	Items[]
+	Current
+	Dismiss()
+	MoveNext()
+	MoveBack()
+
+// Something which requires user interaction to be marked as completed.
+// Once complete, the popup hint will be dismissed, and the tutorial will advance.
+TutorialItem:
+	Dismiss() // Some action/interaction/area of effect -> dismiss this item -> move next in tutorial
+	// A UI element, illustrating/documenting something to the user
+	PopupHint:
+		Text

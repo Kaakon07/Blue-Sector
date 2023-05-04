@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:397f5c1c4616887eab6c819e58bd9564b86cecc32fc716536d5ea7e33c3e6a1d
-size 511
+using UnityEngine;
+
+public class ModeBtnBridge : MonoBehaviour
+{
+    private Game game;
+
+    [HideInInspector]
+    public enum ButtonType
+    {
+        L1,
+        L2
+    }
+
+    [Tooltip("Which mode should the button switch to?")]
+    public ButtonType buttonType;
+
+    private void Awake()
+    {
+        game = FindObjectOfType<Game>();
+    }
+
+    public void OnButton()
+    {
+        if (game.startGame) return; // Disable button if game is runnig.
+        game.modesClass.ChangeTo(((int)buttonType));
+    }
+}

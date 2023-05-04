@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5f32181ab7ca3e721cb61e22569ce69428b8130be432526d640bf68b1e4f7e91
-size 386
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/VR4VET/Scenes/JorgeTesting.unity.meta
+guid: 5b43b6fa653ebc64babcb6f8b03cb342
+========
+guid: e831a659958cb3340a604d66fcd91166
+folderAsset: yes
+>>>>>>>> 56b4624 (state saver progress. Finally have acces to the repo so big push):Assets/stateSaver.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9e2b24517523f0567a37661f55816dab800e3502306b6f69dda293369f08f690
-size 700
+<!--- Not useful for our project for the moment, but may be used later
+* **Please check if the PR fulfills these requirements**
+- [ ] The commit message follows our guidelines
+- [ ] Tests for the changes have been added (for bug fixes/features)
+- [ ] Docs have been added / updated (for bug fixes / features)
+--->
+* **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
+
+
+* **What is the current behavior?** (You can also link to an open issue here)
+
+
+* **What is the new behavior?** (if this is a feature change)
+
+
+* **Does this PR introduce a breaking change?** (What changes might users need to make in their application due to this PR?)
+
+
+* **Other information**:
+

@@ -1,3 +1,31 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7f0d6b27e763b97ffac227a11468c0eb18ebf90c3115d266e116b7d6ca296567
-size 688
+﻿/* Copyright (C) 2020 IMTEL NTNU - All Rights Reserved
+ * Developer: Abbas Jafari
+ * Ask your questions by email: a85jafari@gmail.com
+ */
+
+using UnityEngine;
+
+[CreateAssetMenu]
+public class SkyboxHolder: ScriptableObject
+{
+
+	[SerializeField] Material defaultSkyboxMaterial;
+	[SerializeField] Material videoPlayerSkyboxMaterial;
+
+
+	/// <summary>
+	/// adds video renderer to active sceene skybox
+	/// </summary>
+	public void applyVideoTextureToSkybox()
+	{
+		RenderSettings.skybox = videoPlayerSkyboxMaterial;
+	}
+
+	/// <summary>
+	/// removes video renderer to active sceene skybox
+	/// </summary>
+	public void applyDefaultSkybox()
+	{
+		RenderSettings.skybox = defaultSkyboxMaterial;
+	}
+}

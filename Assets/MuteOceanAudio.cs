@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c35ba29501358c91a36ec23d21d7d50835e4ced940369be6e83b6ec7a612bb2c
-size 298
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MuteOceanAudio : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

@@ -1,3 +1,35 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2dcae0a2895cbfc2413638508079791530a0cbd44c13708f673bd9c84e7a5f0c
-size 957
+﻿public sealed class NonActiveMerdHungryHint : FishFeedHint
+{
+    private MerdCameraController cameraController;
+    private FishSystemScript[] fishSystems;
+    private FishSystemScript selectedFishSystem;
+    protected override void Start()
+    {
+        base.Start();
+        cameraController = FindObjectOfType<MerdCameraController>();
+        fishSystems = FindObjectsOfType<FishSystemScript>();
+        cameraController.SelectedFishSystemChanged
+            .AddListener(FishSystemChanged);
+    }
+
+    protected override bool ShouldTrigger()
+    {
+        foreach (var fishSystem in fishSystems)
+        {
+            if (fishSystem == selectedFishSystem)
+                continue;
+
+            if (fishSystem.IsHungry())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void FishSystemChanged(FishSystemScript fishSystemScript)
+    {
+        selectedFishSystem = fishSystemScript;
+    }
+}

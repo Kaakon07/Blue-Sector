@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:646d7f43c3ba67ada5988d9bf9787c19136582c93d2ded095b8466fdbe62453e
-size 378
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class GameData
+{
+    public int score;
+    public string saveDate;
+    public string saveName;
+    public GameData(int score, string saveDate, string saveName)
+    {
+        this.score = score;
+        this.saveDate = saveDate;
+        this.saveName = saveName;
+    }
+}

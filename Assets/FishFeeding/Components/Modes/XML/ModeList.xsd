@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2ceb7494a632b093d50d0bbef33afa6da4a5868e2e7af1136231dbfcf0d1c258
-size 1091
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="modes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="mode" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="tutorial" type="xs:string" />
+                            <xs:element name="time" type="xs:integer" />
+                            <xs:element name="threshold" type="xs:float" />
+                            <xs:element name="unlock" type="xs:integer" />
+                            <xs:element name="modifier" type="xs:float" />
+                            <xs:element name="unlocked" type="xs:boolean" />
+							<xs:element name="hud" type="xs:boolean" />
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

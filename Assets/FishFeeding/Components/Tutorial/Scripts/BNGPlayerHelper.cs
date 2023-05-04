@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7e31a0a7cc5b1f2639cfbbfbb389565ea145c9aa4721a8565fc9214ba5dea970
-size 720
+using BNG;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public sealed class BNGPlayerLocator
+{
+    public static readonly BNGPlayerLocator Instance = new();
+    private BNGPlayerController playerController;
+
+    public BNGPlayerController PlayerController
+    {
+        get
+        {
+            if (playerController == null)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                playerController = player != null
+                    ? player.GetComponentInChildren<BNGPlayerController>()
+                    : Object.FindObjectOfType<BNGPlayerController>();
+            }
+
+            return playerController;
+        }
+    }
+}

@@ -1,3 +1,51 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:63b523e9cfc2516f01906ad1b50ddba94e8dd981836c46ff62d0bb96db49e97b
-size 506
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Fish
+  - Fish System
+  - ScoreText
+  - Cuttable
+  - MonitorMerdCanvas
+  - MonitorMerd
+  - MerdCameraButton
+  - ModesButton
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Fish
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

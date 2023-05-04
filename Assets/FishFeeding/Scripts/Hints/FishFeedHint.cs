@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b854cda7ea6f9b90e89ea7dee3551384fd37a650ecb9ff28368f1aacbe5cc66d
-size 1104
+﻿using System;
+using UnityEngine;
+using FeedingIntensity = FishSystemScript.FeedingIntensity;
+using FishState = FishSystemScript.FishState;
+
+public abstract class FishFeedHint : MonoBehaviour
+{
+    public GameObject Merd;
+    private Tutorial tutorial;
+    private DateTime canTriggerAt;
+    private TimeSpan triggerDelay;
+
+    protected FishSystemScript FishSystem { get; set; }
+
+    protected virtual void Start()
+    {
+        tutorial = GetComponentInChildren<Tutorial>();
+        triggerDelay = TimeSpan.FromSeconds(UnityEngine.Random.Range(10, 60));
+        canTriggerAt = DateTime.MaxValue;
+        Debug.Assert(tutorial != null);
+        if (Merd != null)
+        {
+            FishSystem = Merd.GetComponent<FishSystemScript>();
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if (!tutorial.Triggered && ShouldTrigger())
+        {
+            canTriggerAt = DateTime.Now + triggerDelay;
+        }
+
+        if (canTriggerAt < DateTime.Now)
+        {
+            tutorial.Trigger();
+            enabled = false;
+        }
+    }
+
+    protected abstract bool ShouldTrigger();
+}

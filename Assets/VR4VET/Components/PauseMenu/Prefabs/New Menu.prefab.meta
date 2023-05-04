@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:33458a4cccc0e4df473bb8e013cda895f2c1fd2ad23d7670bbfec7dea9887b03
-size 356
+fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/VR Hands/Prefabs/LeftHand.prefab.meta
+guid: bcd73c4201a58384d84d73ed781cf7d1
+=======
+guid: 70ae1d37ecfb95045baf1b715b5fea17
+>>>>>>> Stashed changes:Assets/VR4VET/Prefabs/PauseMenu/Prefabs/New Menu.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

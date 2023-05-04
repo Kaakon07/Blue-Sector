@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:77ea578d3f2e47fa9bd8a06fc7cfc2301065d48140c9852c61ad624b8e6291bb
-size 785
+﻿Shader "Custom/Flip Normals" {
+    Properties{
+        _MainTex("Base (RGB)", 2D) = "white" {}
+    }
+        SubShader{
+
+            Tags { "RenderType" = "Opaque" }
+
+            Cull Off
+
+            CGPROGRAM
+
+            #pragma surface surf Lambert vertex:vert
+            sampler2D _MainTex;
+
+            struct Input {
+                float2 uv_MainTex;
+                float4 color : COLOR;
+            };
+
+            void vert(inout appdata_full v) {
+                v.normal.xyz = v.normal * -1;
+            }
+
+            void surf(Input IN, inout SurfaceOutput o) {
+                 fixed3 result = tex2D(_MainTex, IN.uv_MainTex);
+                 o.Albedo = result.rgb;
+                 o.Alpha = 1;
+            }
+
+            ENDCG
+
+    }
+
+        Fallback "Diffuse"
+}
