@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-public class Fish : MonoBehaviour, IPointerClickHandler
+public class Fish : MonoBehaviour
 {
     [SerializeField]
     private int gillDamage = 3;
@@ -27,6 +27,7 @@ public class Fish : MonoBehaviour, IPointerClickHandler
     private Quaternion originalRotation;
     [HideInInspector]
     public float waterHeight;
+    [HideInInspector]
     public BNG.UIPointer uIPointer;
 
     public GameObject marker;
@@ -37,10 +38,10 @@ public class Fish : MonoBehaviour, IPointerClickHandler
 
     InspectionTaskManager inspectionTaskManager;
     public LayerMask layer;
-
+    [HideInInspector]
     public GameObject lastMarkedLouse;
-
-    private int markedLice = 0;
+    [HideInInspector]
+    public int markedLice = 0;
 
     public int health = 10;
 
@@ -137,7 +138,7 @@ public class Fish : MonoBehaviour, IPointerClickHandler
         lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
     }
 
-    public void OnPointerClick(PointerEventData eventData) {
+    /*public void OnPointerClick(PointerEventData eventData) {
         lastMarkedLouse = checkForLouse(eventData.pointerCurrentRaycast.worldPosition);
         if(lastMarkedLouse != null){
             GameObject newmarker = Instantiate(marker,lastMarkedLouse.transform.position, new Quaternion(0,0,0,0));
@@ -157,7 +158,7 @@ public class Fish : MonoBehaviour, IPointerClickHandler
             }
         }
         return null;
-    }
+    }*/
 
     public void checkForDamage(bool hittingWater, float velocity) {
         float damageThreshold = 2f;
