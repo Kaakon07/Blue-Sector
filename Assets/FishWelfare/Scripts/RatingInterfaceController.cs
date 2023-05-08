@@ -9,6 +9,7 @@ public class RatingInterfaceController : MonoBehaviour
 
     private bool active = false;
     private List<ButtonController> buttons = new List<ButtonController>();
+    private Fish fish = null;
 
     void Start() {
         foreach(ButtonController button in GetComponentsInChildren<ButtonController>()){
@@ -16,7 +17,9 @@ public class RatingInterfaceController : MonoBehaviour
                 buttons.Add(button);
             }
         }
+        fish = GetComponent<RectTransform>().root.gameObject.GetComponent<Fish>();
         gameObject.SetActive(active);
+
     }
 
     public void ToggleActive() {
@@ -24,8 +27,13 @@ public class RatingInterfaceController : MonoBehaviour
         gameObject.SetActive(active);
     }
 
-    public void SeteActive(bool active) {
-        this.active = active;
+    public void SeteActive() {
+        if (fish.isGrabbedCount > 0) {
+            active = true;
+        }
+        else {
+            active = false;
+        }
         gameObject.SetActive(active);
     }
 
