@@ -9,6 +9,8 @@ public class ScreenController : MonoBehaviour
 
     private InspectionTaskManager inspectionTaskManager;
     private TMP_Text screen;
+    private List<Fish> inspectedFish;
+    public RowUi rowUi; 
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +19,21 @@ public class ScreenController : MonoBehaviour
         screen = GameObject.FindGameObjectWithTag("Display").GetComponent("TMP_Text") as TMP_Text;
     }
 
-    public void DrawScreen(bool complete) {
-        string output = "";
-        foreach(Fish fish in inspectionTaskManager.GetInspectedFish()) {
-            output += "Fish " + fish.GetId() + ":\nGuess:\nGill Damage: " + fish.GetGillDamageGuessed() + "   Lice: " + fish.GetMarkedLice() + "\nAnswer:\nGill Damage: " + fish.GetGillDamage() + "  Lice: " + fish.GetLiceList().Count + "\nHealth: " + fish.health + "/10";
+    public void DrawScreen(Fish fish) {
+        RowUi row = Instantiate(rowUi, transform).GetComponent<RowUi>();
+        row.fish.text = fish.GetId().ToString();
+        row.gillDamage.text = fish.GetGillDamageGuessed().ToString() + "/" + fish.GetGillDamage().ToString();
+        row.handling.text = fish.health.ToString();
+        row.lice.text =fish.markedLice.ToString() + "/" + fish.GetLiceList().Count;
+        row.score.text = "1";
+    }
+
+    public void RemoveItem(int id) {
+        inspectedFish = GameObject.FindObjectOfType<InspectionTaskManager>().GetInspectedFish();
+        foreach(RowUi item in GetComponentsInChildren<RowUi>()){
+            if(id.ToString() == item.fish.text){
+                Destroy(item.gameObject);
+            }
         }
-        screen.text = output;
     }
 }

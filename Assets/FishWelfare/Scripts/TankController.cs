@@ -31,11 +31,13 @@ public class TankController : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        if(isGoal){
-            inspectionTaskManager.RegressInspection(other.gameObject);
-        }
         if(other.tag == "Bone"){
             other.gameObject.GetComponent<Bone>().UpdateWaterBody(0f, new Vector3(0f,0f,0f), 0f, 0f, false);
+            if(isGoal){
+                if(other.gameObject.GetComponent<Bone>().GetParent().isInWaterCount == 0){
+                    inspectionTaskManager.RegressInspection(other.gameObject);
+                }
+            }   
         }
     }
 }

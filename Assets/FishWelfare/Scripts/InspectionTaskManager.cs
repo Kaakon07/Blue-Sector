@@ -29,13 +29,14 @@ public class InspectionTaskManager : MonoBehaviour
     public void ProgressInspection(GameObject obj) 
     {
         if((obj.GetComponent("Fish") as Fish) != null) {
-            if(AddFish(obj.GetComponent("Fish") as Fish)){
+            Fish fish = obj.GetComponent("Fish") as Fish;
+            if(AddFish(fish)){
                 inspectedFishCount++;
             if(inspectedFishCount == inspectionTarget){
                 taskHolder.AddPoints(activityInspect, skill1, 10);
-                screenController.DrawScreen(true);
+                screenController.DrawScreen(fish);
             } else {
-                screenController.DrawScreen(false);
+                screenController.DrawScreen(fish);
             }
             }
         }
@@ -44,9 +45,10 @@ public class InspectionTaskManager : MonoBehaviour
     public void RegressInspection(GameObject obj) 
     {
         if((obj.GetComponent("Fish") as Fish) != null) {
-            RemoveFish(obj.GetComponent("Fish") as Fish);
+            Fish fish = obj.GetComponent("Fish") as Fish;
+            RemoveFish(fish);
             inspectedFishCount--;
-            screenController.DrawScreen(false);
+            screenController.RemoveItem(fish.GetId());
         }
     }
 

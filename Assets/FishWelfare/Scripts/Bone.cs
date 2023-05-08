@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Bone : MonoBehaviour, IPointerClickHandler
 {
-
     private Fish parent;
     private bool isInWater;
     private bool isGrabbed;
@@ -86,5 +85,9 @@ public class Bone : MonoBehaviour, IPointerClickHandler
     public void SetIsGrabbed(bool isGrabbed) {
         if (isGrabbed) parent.isGrabbedCount++;
         else parent.isGrabbedCount--;
+    }
+
+    public Fish GetParent() {
+        return parent;
     }
 }
