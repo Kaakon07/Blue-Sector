@@ -15,7 +15,6 @@ public class Bone : MonoBehaviour, IPointerClickHandler
     public GameObject marker;
     private List<GameObject> liceList = new List<GameObject>();
     public LayerMask layer;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -48,10 +47,16 @@ public class Bone : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData) {
+        MarkLouse(eventData);
+    }
+
+    public void MarkLouse(PointerEventData eventData){
+        Debug.Log("Marking Louse");
         lastMarkedLouse = checkForLouse(eventData.pointerCurrentRaycast.worldPosition);
         if(lastMarkedLouse != null){
             GameObject newmarker = Instantiate(marker,lastMarkedLouse.transform.position, new Quaternion(0,0,0,0));
             newmarker.transform.parent = lastMarkedLouse.transform;
+            
         }
     }
 
@@ -60,17 +65,25 @@ public class Bone : MonoBehaviour, IPointerClickHandler
             GameObject hit = hitInfo.collider.gameObject;
             foreach(GameObject louse in liceList) {
                 if (hit == louse && !louse.GetComponent<Louse>().marked) {
+                    Debug.Log("Same louse");
                     louse.GetComponent<Louse>().marked = true;
                     parent.markedLice++;
                     return louse;
                 }
             }
         }
+        Debug.Log("No louse");
         return null;
     }
 
     private void OnCollisionEnter(Collision other) {
         //parent.SetMoveTarget();
+        if(other.collider.tag == "Water"){
+            parent.checkForDamage(true, other.relativeVelocity.magnitude);
+        }
+        else {
+            parent.checkForDamage(false, other.relativeVelocity.magnitude);
+        }
     }
 
     public void SetIsInWater(bool isInWater) {

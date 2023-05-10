@@ -46,6 +46,7 @@ public class Fish : MonoBehaviour
     public int health = 10;
 
     private AudioSource hurtSound;
+    private AudioSource markSound;
     [HideInInspector]
     public int isInWaterCount = 0;
     [HideInInspector]
@@ -53,6 +54,8 @@ public class Fish : MonoBehaviour
     private bool kinematicBones = false;
     private Animator animator;
     private Transform fishbone;
+    private bool damageInvulerability = false;
+    public float damageInvulnerabilityTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +68,9 @@ public class Fish : MonoBehaviour
         liceList = FindObjectwithTag("Louse");
         boneList = FindObjectwithTag("Bone");
         Debug.Log("number of bones: " + boneList.Count);
-        hurtSound = GetComponent<AudioSource>();
+        AudioSource[] sounds = GetComponents<AudioSource>();
+        hurtSound = sounds[0];
+        markSound = sounds[1];
         //The point from which the raycast targeting lice on fishbodie will have its origin. In this case it is RightHandPointer in XR Rig Advanced
         pointerFinger = GameObject.FindGameObjectWithTag("Pointer");
         animator = GetComponent<Animator>();
@@ -81,6 +86,10 @@ public class Fish : MonoBehaviour
         } 
         else {
             Stop();
+        }
+        damageInvulnerabilityTimer -= Time.deltaTime;
+        if(damageInvulnerabilityTimer <= 0f) {
+            damageInvulerability = false;
         }
     }
 
@@ -161,18 +170,23 @@ public class Fish : MonoBehaviour
     }*/
 
     public void checkForDamage(bool hittingWater, float velocity) {
-        float damageThreshold = 2f;
-        if (hittingWater) {
-            damageThreshold = 4f;
-        }
-        else if(isGrabbedCount > 0){
-            damageThreshold = 0.4f;
-        }
-        if(velocity > damageThreshold) {
-            if(health > 0) {
-                health--;
+        if(!damageInvulerability){
+            damageInvulerability = true;
+            damageInvulnerabilityTimer = 1f;
+                float damageThreshold = 2f;
+            if (hittingWater) {
+                damageThreshold = 4f;
             }
-            hurtSound.Play(0);
+            else if(isGrabbedCount > 0){
+                damageThreshold = 0.4f;
+            }
+            if(velocity > damageThreshold) {
+                if(health > 0) {
+                    health--;
+                }
+                hurtSound.Play(0);
+            }
+            Debug.Log("Taking Damage");
         }
     }
 

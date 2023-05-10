@@ -22,11 +22,11 @@ public class TankController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(isGoal){
-            inspectionTaskManager.ProgressInspection(other.gameObject);
-        }
         if(other.tag == "Bone"){
             other.gameObject.GetComponent<Bone>().UpdateWaterBody(transform.position.y + transform.localScale.y, transform.position, transform.localScale.x, transform.localScale.z, true);
+            if(isGoal){
+                inspectionTaskManager.ProgressInspection(other.transform.root.gameObject.GetComponent<Fish>());
+            }
         }
     }
 
@@ -35,7 +35,7 @@ public class TankController : MonoBehaviour
             other.gameObject.GetComponent<Bone>().UpdateWaterBody(0f, new Vector3(0f,0f,0f), 0f, 0f, false);
             if(isGoal){
                 if(other.gameObject.GetComponent<Bone>().GetParent().isInWaterCount == 0){
-                    inspectionTaskManager.RegressInspection(other.gameObject);
+                    inspectionTaskManager.RegressInspection(other.transform.root.gameObject.GetComponent<Fish>());
                 }
             }   
         }

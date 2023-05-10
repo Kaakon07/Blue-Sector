@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8491760768784580390}
   - component: {fileID: 1496136481971815133}
   - component: {fileID: 2620779415443833564}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Louse 1
-  m_TagString: Untagged
+  m_TagString: Louse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

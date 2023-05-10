@@ -26,30 +26,24 @@ public class InspectionTaskManager : MonoBehaviour
         selectedFish = fishList[0];
     }
 
-    public void ProgressInspection(GameObject obj) 
+    public void ProgressInspection(Fish fish) 
     {
-        if((obj.GetComponent("Fish") as Fish) != null) {
-            Fish fish = obj.GetComponent("Fish") as Fish;
-            if(AddFish(fish)){
-                inspectedFishCount++;
+        if(AddFish(fish)){
+            inspectedFishCount++;
             if(inspectedFishCount == inspectionTarget){
                 taskHolder.AddPoints(activityInspect, skill1, 10);
                 screenController.DrawScreen(fish);
             } else {
                 screenController.DrawScreen(fish);
             }
-            }
-        }
+        }   
     }
 
-    public void RegressInspection(GameObject obj) 
+    public void RegressInspection(Fish fish) 
     {
-        if((obj.GetComponent("Fish") as Fish) != null) {
-            Fish fish = obj.GetComponent("Fish") as Fish;
-            RemoveFish(fish);
-            inspectedFishCount--;
-            screenController.RemoveItem(fish.GetId());
-        }
+        RemoveFish(fish);
+        inspectedFishCount--;
+        screenController.RemoveItem(fish.GetId());
     }
 
     public void SetSelectedFish(Fish fish){
