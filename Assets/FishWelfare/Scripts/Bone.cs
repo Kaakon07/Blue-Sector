@@ -54,9 +54,7 @@ public class Bone : MonoBehaviour, IPointerClickHandler
         Debug.Log("Marking Louse");
         lastMarkedLouse = checkForLouse(eventData.pointerCurrentRaycast.worldPosition);
         if(lastMarkedLouse != null){
-            GameObject newmarker = Instantiate(marker,lastMarkedLouse.transform.position, new Quaternion(0,0,0,0));
-            newmarker.transform.parent = lastMarkedLouse.transform;
-            
+            parent.markSound.Play(0);
         }
     }
 

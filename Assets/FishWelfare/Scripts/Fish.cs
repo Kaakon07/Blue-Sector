@@ -46,7 +46,8 @@ public class Fish : MonoBehaviour
     public int health = 10;
 
     private AudioSource hurtSound;
-    private AudioSource markSound;
+    [HideInInspector]
+    public AudioSource markSound;
     [HideInInspector]
     public int isInWaterCount = 0;
     [HideInInspector]
@@ -55,7 +56,7 @@ public class Fish : MonoBehaviour
     private Animator animator;
     private Transform fishbone;
     private bool damageInvulerability = false;
-    public float damageInvulnerabilityTimer = 0f;
+    public float damageInvulnerabilityTimer = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -175,10 +176,10 @@ public class Fish : MonoBehaviour
             damageInvulnerabilityTimer = 1f;
                 float damageThreshold = 2f;
             if (hittingWater) {
-                damageThreshold = 4f;
+                damageThreshold = 3f;
             }
             else if(isGrabbedCount > 0){
-                damageThreshold = 0.4f;
+                damageThreshold = 2f;
             }
             if(velocity > damageThreshold) {
                 if(health > 0) {

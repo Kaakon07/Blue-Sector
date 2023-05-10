@@ -7,11 +7,13 @@ public class TankController : MonoBehaviour
     private InspectionTaskManager inspectionTaskManager;
     public bool isGoal = false;
     private BoxCollider collider = new BoxCollider();
+    private AudioSource waterSound;
     // Start is called before the first frame update
     void Start()
     {
         inspectionTaskManager = GameObject.FindObjectOfType<InspectionTaskManager>();
         collider = GetComponent<BoxCollider>();
+        waterSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class TankController : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     {
         if(other.tag == "Bone"){
+            //waterSound.Play(0);
             other.gameObject.GetComponent<Bone>().UpdateWaterBody(transform.position.y + transform.localScale.y, transform.position, transform.localScale.x, transform.localScale.z, true);
             if(isGoal){
                 inspectionTaskManager.ProgressInspection(other.transform.root.gameObject.GetComponent<Fish>());
