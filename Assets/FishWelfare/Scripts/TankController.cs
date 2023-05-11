@@ -8,7 +8,7 @@ public class TankController : MonoBehaviour
     public bool isGoal = false;
     private BoxCollider collider = new BoxCollider();
     private AudioSource waterSound;
-    public float SedativeConsentration = 0f;
+    public float sedativeConsentration = 0f;
     // Start is called before the first frame update
     void Start()
     {

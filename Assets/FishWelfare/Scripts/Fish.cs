@@ -50,10 +50,14 @@ public class Fish : MonoBehaviour
     private bool kinematicBones = false;
     private Animator animator;
     private Transform fishbone;
+    [HideInInspector]
+    public RowUi scoreBoardEntry;
     private bool damageInvulerability = false;
     public float damageInvulnerabilityTimer = 1f;
-    public float SedationLevel = 1f;
+    public float unsediatedLevel = 1f;
     public TankController tank;
+    //with a sedativeConsentration of 0.01 the sedationTimer will take 5 minutes to count down.
+    public float sedationTimer = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +95,10 @@ public class Fish : MonoBehaviour
         if(damageInvulnerabilityTimer <= 0f) {
             damageInvulerability = false;
         }
-        Debug.Log("Sedation level: " + SedationLevel);
+        checkForOverSedation();
+        if(scoreBoardEntry != null){
+            scoreBoardEntry.handling.text = health.ToString();
+        }
     }
 
     void PeriodicUpdates() {
@@ -132,20 +139,37 @@ public class Fish : MonoBehaviour
     }
 
     private void updateSedation() {
-        if(SedationLevel > 0f && tank != null){
-            SedationLevel -= Time.deltaTime * 0.01f;
-        } else if(SedationLevel < 0f) {
-            SedationLevel = 0f;
+        if(tank.sedativeConsentration == 0f){
+            if(unsediatedLevel < 1f) {
+                unsediatedLevel += Time.deltaTime * 0.01f;
+            }
         }
-        animator.speed = SedationLevel;
-        movementSpeed = originalMovementSpeed * SedationLevel;
-        rotationSpeed = (originalRotationSpeed * SedationLevel) / 1.5f;
+        else {
+            if(unsediatedLevel > 0f && tank != null){
+                unsediatedLevel -= Time.deltaTime * tank.sedativeConsentration;
+            } else if(unsediatedLevel < 0f) {
+                unsediatedLevel = 0f;
+            }
+            animator.speed = unsediatedLevel;
+            movementSpeed = originalMovementSpeed * unsediatedLevel;
+            rotationSpeed = (originalRotationSpeed * unsediatedLevel) / 1.5f;
+        }
     }
 
     private void followchild() {
         Vector3 originalPosition = fishbone.position;
         transform.position = fishbone.position;
         fishbone.position = originalPosition;
+    }
+
+    private void checkForOverSedation() {
+        if(unsediatedLevel < 1f) {
+            sedationTimer -= Time.deltaTime * tank.sedativeConsentration;
+        }
+        if(sedationTimer <= 0 && health > 0){
+            health -= 1;
+            sedationTimer = .1f;
+        }
     }
 
     public void SetMoveTarget() {

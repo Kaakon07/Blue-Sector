@@ -22,9 +22,10 @@ public class ScreenController : MonoBehaviour
         RowUi row = Instantiate(rowUi, transform).GetComponent<RowUi>();
         row.fish.text = fish.GetId().ToString();
         row.gillDamage.text = fish.GetGillDamageGuessed().ToString() + "/" + fish.GetGillDamage().ToString();
-        row.handling.text = fish.health.ToString();
+        //row.handling.text = fish.health.ToString();
         row.lice.text =fish.markedLice.ToString() + "/" + fish.GetLiceList().Count;
         row.score.text = "1";
+        fish.scoreBoardEntry = row;
     }
 
     public void RemoveItem(int id) {

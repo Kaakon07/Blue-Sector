@@ -75,10 +75,9 @@ public class Bone : MonoBehaviour, IPointerClickHandler
     }
 
     private void OnCollisionEnter(Collision other) {
-        //parent.SetMoveTarget();
-        if(other.collider.tag == "Water"){
+        if(other.transform.root.tag == "Water"){
             parent.checkForDamage(true, other.relativeVelocity.magnitude);
-            parent.tank = other.gameObject.GetComponent<TankController>();
+            parent.tank = other.transform.root.GetComponent<TankController>();
         }
         else {
             parent.checkForDamage(false, other.relativeVelocity.magnitude);

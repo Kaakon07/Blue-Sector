@@ -9,6 +9,8 @@ public class Stream : MonoBehaviour
     private ParticleSystem splashParticle = null;
     private Coroutine pourRoutine = null;
 
+    private TankController target = null;
+
     private void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
         splashParticle = GetComponentInChildren<ParticleSystem>();
@@ -52,6 +54,9 @@ public class Stream : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, 10f);
+        if(hit.collider.transform.gameObject.GetComponent<TankController>() != null){
+            target = hit.collider.transform.gameObject.GetComponent<TankController>();
+        }
         Vector3 endPoint = hit.collider ? hit.point : ray.GetPoint(10f);
         return endPoint;
     }
@@ -76,6 +81,9 @@ public class Stream : MonoBehaviour
             splashParticle.gameObject.transform.position = targetPosition;
             bool isHitting = HasReachedPosition(1, targetPosition);
             splashParticle.gameObject.SetActive(isHitting);
+            if(target != null) {
+                target.sedativeConsentration += 0.00005f;
+            }
             yield return null;
         }
     }
