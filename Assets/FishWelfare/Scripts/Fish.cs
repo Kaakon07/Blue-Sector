@@ -12,14 +12,14 @@ public class Fish : MonoBehaviour
     private int gillDamageGuessed = 0;
     [SerializeField]
     private int id;
-    
-    //The following variables are used for handeling behaviour with water
     [HideInInspector]
     public Vector3 waterBodyCenter;
     private Vector3 targetPosition;
     private Quaternion lookRotation;
     public float movementSpeed = .5f;
-    public float rotationSpeed = 10;
+    private float originalMovementSpeed;
+    public float rotationSpeed = 10f;
+    private float originalRotationSpeed;
     [HideInInspector]
     public float waterBodyXLength;
     [HideInInspector]
@@ -29,22 +29,17 @@ public class Fish : MonoBehaviour
     public float waterHeight;
     [HideInInspector]
     public BNG.UIPointer uIPointer;
-
     public GameObject marker;
-
     private GameObject pointerFinger;
     private List<GameObject> liceList = new List<GameObject>();
     private List<GameObject> boneList = new List<GameObject>(); //;)
-
     InspectionTaskManager inspectionTaskManager;
     public LayerMask layer;
     [HideInInspector]
     public GameObject lastMarkedLouse;
     [HideInInspector]
     public int markedLice = 0;
-
     public int health = 10;
-
     private AudioSource hurtSound;
     [HideInInspector]
     public AudioSource markSound;
@@ -57,6 +52,8 @@ public class Fish : MonoBehaviour
     private Transform fishbone;
     private bool damageInvulerability = false;
     public float damageInvulnerabilityTimer = 1f;
+    public float SedationLevel = 1f;
+    public TankController tank;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +73,8 @@ public class Fish : MonoBehaviour
         pointerFinger = GameObject.FindGameObjectWithTag("Pointer");
         animator = GetComponent<Animator>();
         fishbone = boneList[0].transform;
+        originalMovementSpeed = movementSpeed;
+        originalRotationSpeed = rotationSpeed;
     }
 
     // Update is called once per frame
@@ -92,6 +91,7 @@ public class Fish : MonoBehaviour
         if(damageInvulnerabilityTimer <= 0f) {
             damageInvulerability = false;
         }
+        Debug.Log("Sedation level: " + SedationLevel);
     }
 
     void PeriodicUpdates() {
@@ -117,6 +117,7 @@ public class Fish : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
         }
+        updateSedation();
     }
 
     private void Stop() {
@@ -128,6 +129,17 @@ public class Fish : MonoBehaviour
                 animator.enabled = false;
             }
         }
+    }
+
+    private void updateSedation() {
+        if(SedationLevel > 0f && tank != null){
+            SedationLevel -= Time.deltaTime * 0.01f;
+        } else if(SedationLevel < 0f) {
+            SedationLevel = 0f;
+        }
+        animator.speed = SedationLevel;
+        movementSpeed = originalMovementSpeed * SedationLevel;
+        rotationSpeed = (originalRotationSpeed * SedationLevel) / 1.5f;
     }
 
     private void followchild() {

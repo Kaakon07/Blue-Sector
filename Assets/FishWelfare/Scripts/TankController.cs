@@ -8,6 +8,7 @@ public class TankController : MonoBehaviour
     public bool isGoal = false;
     private BoxCollider collider = new BoxCollider();
     private AudioSource waterSound;
+    public float SedativeConsentration = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class TankController : MonoBehaviour
         
     }
 
+//The two following functions should be refactored and moved into Bone
     private void OnTriggerEnter(Collider other) 
     {
         if(other.tag == "Bone"){

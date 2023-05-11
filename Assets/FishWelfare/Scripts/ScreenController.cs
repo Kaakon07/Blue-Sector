@@ -16,7 +16,6 @@ public class ScreenController : MonoBehaviour
     void Start()
     {
         inspectionTaskManager = GameObject.FindObjectOfType<InspectionTaskManager>();
-        screen = GameObject.FindGameObjectWithTag("Display").GetComponent("TMP_Text") as TMP_Text;
     }
 
     public void DrawScreen(Fish fish) {
