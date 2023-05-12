@@ -9,6 +9,8 @@ public class TankController : MonoBehaviour
     private BoxCollider collider = new BoxCollider();
     private AudioSource waterSound;
     public float sedativeConsentration = 0f;
+
+public TutorialEntry tutorialEntry;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,10 @@ public class TankController : MonoBehaviour
             other.gameObject.GetComponent<Bone>().UpdateWaterBody(transform.position.y + transform.localScale.y, transform.position, transform.localScale.x, transform.localScale.z, true);
             if(isGoal){
                 inspectionTaskManager.ProgressInspection(other.transform.root.gameObject.GetComponent<Fish>());
+                tutorialEntry.SetCompleted();
             }
+        } else if (other.tag == "Hand" && !isGoal) {
+            tutorialEntry.SetCompleted();
         }
     }
 

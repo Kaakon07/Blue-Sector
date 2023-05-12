@@ -9,12 +9,12 @@ using UnityEngine.Events;
 
 public class TutorialEntry : MonoBehaviour
 {
-    internal Tutorial Tutorial { get; set; }
+    public Tutorial Tutorial;
     public void SetCompleted()
     {
         if (gameObject.activeSelf
             && Tutorial != null
-            && Tutorial.Current == this)
+            && Tutorial.Current == this.gameObject)
         {
             Tutorial.MoveNext();
         }

@@ -19,6 +19,7 @@ TagManager:
   - YrkesTitle
   - Pointer
   - Bone
+  - Hand
   layers:
   - Default
   - TransparentFX

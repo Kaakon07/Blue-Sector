@@ -8,6 +8,7 @@ using UnityEditor;
 public class Tutorial : MonoBehaviour
 {   
     [SerializeField]private bool StartOnStartup;
+    [SerializeField] private int indexOfCurrentItem = -1;
     public GameObject[] Items = Array.Empty<GameObject>();
     /// <summary>
     /// Gets an event which is fired when all the tutorial entires have been completed.
@@ -19,7 +20,6 @@ public class Tutorial : MonoBehaviour
     /// </summary>
     public UnityEvent OnTriggered;
 
-    private int indexOfCurrentItem = -1;
     private bool triggered;
     private bool dismissed;
 
@@ -59,9 +59,9 @@ public class Tutorial : MonoBehaviour
                 return;
 
             triggered = value;
-            if (value && !dismissed)
+            if (value && !dismissed && IndexOfCurrentItem < 0)
             {
-                IndexOfCurrentItem = 0;
+                MoveNext();
             }
         }
     }
@@ -89,7 +89,6 @@ public class Tutorial : MonoBehaviour
     public void MoveNext()
     {
         IndexOfCurrentItem = Math.Min(IndexOfCurrentItem, Items.Length) + 1;
-        Debug.Log(IndexOfCurrentItem);
         foreach (var entry in Items)
         {
             if(entry != Current) entry.gameObject.SetActive(false);
