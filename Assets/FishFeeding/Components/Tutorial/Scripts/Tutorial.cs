@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
-public class Tutorial : MonoBehaviour, ITutorial
-{
+public class Tutorial : MonoBehaviour
+{   
+    [SerializeField]private bool StartOnStartup;
     public GameObject[] Items = Array.Empty<GameObject>();
-    public GameObject PopupHint;
-
     /// <summary>
     /// Gets an event which is fired when all the tutorial entires have been completed.
     /// </summary>
@@ -19,7 +19,7 @@ public class Tutorial : MonoBehaviour, ITutorial
     /// </summary>
     public UnityEvent OnTriggered;
 
-    private int indexOfCurrentItem = 0;
+    private int indexOfCurrentItem = -1;
     private bool triggered;
     private bool dismissed;
 
@@ -115,9 +115,13 @@ public class Tutorial : MonoBehaviour, ITutorial
 
     //Deactivates all but the starting entry
     private void Start()
-    {
+    {   
+        if(StartOnStartup)IndexOfCurrentItem = 0;
         foreach (var entry in Items)
         {
+            if(entry.GetComponentsInChildren<TutorialEntry>().Length == 0){
+                 ArrayUtility.Remove(ref Items, entry);
+            }
             if(entry != Current) entry.gameObject.SetActive(false);
             if(entry == Current) entry.gameObject.SetActive(true);
         }
