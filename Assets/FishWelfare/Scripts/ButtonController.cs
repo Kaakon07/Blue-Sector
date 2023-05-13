@@ -15,14 +15,16 @@ public class ButtonController : MonoBehaviour
     }
 
     public void ToggleColor() {
-        ratingInterfaceController.SyncButtons(this);
-        if(selected) {
-            gameObject.GetComponent<Image>().color = unselectedColor;
+        if(ratingInterfaceController != null) {
+            ratingInterfaceController.SyncButtons(this);
+            if(selected) {
+                gameObject.GetComponent<Image>().color = unselectedColor;
+            }
+            else{
+                gameObject.GetComponent<Image>().color = Color.green;
+            }
+            selected = !selected;
         }
-        else{
-            gameObject.GetComponent<Image>().color = Color.green;
-        }
-        selected = !selected;
     }
 
     public void SetColor(bool selected) {

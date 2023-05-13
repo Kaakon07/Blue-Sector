@@ -20,6 +20,7 @@ TagManager:
   - Pointer
   - Bone
   - Hand
+  - Hammer
   layers:
   - Default
   - TransparentFX
