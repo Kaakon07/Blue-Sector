@@ -62,7 +62,7 @@ public class ScreenController : MonoBehaviour
                 break;
         }
         int liceScore = 10 - Mathf.Abs(10 - (markedLice/lice)*10);
-        Debug.Log("Gill score: " + gillScore + " Lice score: " + liceScore + " handling: " + handling);
+        //Debug.Log("Gill score: " + gillScore + " Lice score: " + liceScore + " handling: " + handling);
         return gillScore + liceScore + handling;
     }
 }

@@ -19,11 +19,10 @@ public class TutorialHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Kjører på");
+
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Entered");
         if(other.gameObject.tag == "Hammer") {
             hammerEnter.Invoke();
         } else if (other.gameObject.tag == "Player") {

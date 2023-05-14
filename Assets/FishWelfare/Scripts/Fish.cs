@@ -17,9 +17,9 @@ public class Fish : MonoBehaviour
     private Vector3 targetPosition;
     private Quaternion lookRotation;
     public float movementSpeed = .5f;
-    private float originalMovementSpeed;
+    private float originalMovementSpeed = .5f;
     public float rotationSpeed = 10f;
-    private float originalRotationSpeed;
+    private float originalRotationSpeed = 10f;
     [HideInInspector]
     public float waterBodyXLength;
     [HideInInspector]
@@ -59,6 +59,8 @@ public class Fish : MonoBehaviour
     //with a sedativeConsentration of 0.01 the sedationTimer will take 5 minutes to count down.
     public float sedationTimer = 3;
 
+    private bool putInWater = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,11 +86,18 @@ public class Fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isGrabbedCount);
         followchild();
+        if(isGrabbedCount > 0) {
+            putInWater = false;
+        }
         if(isInWaterCount > 0 && isGrabbedCount <= 0){
+            putInWater = true;
             Move();
         } 
-        else {
+        else if(isInWaterCount == 0 && !putInWater) {
+            Stop();
+        } else if(isGrabbedCount > 0) {
             Stop();
         }
         damageInvulnerabilityTimer -= Time.deltaTime;
@@ -111,18 +120,24 @@ public class Fish : MonoBehaviour
     }
 
     private void Move() {
+        Debug.Log("Moving");
         if(!kinematicBones) {
             foreach( GameObject bone in boneList) {
                 bone.GetComponent<Rigidbody>().isKinematic = true;
-                GetComponent<Rigidbody>().isKinematic = true;
+                //GetComponent<Rigidbody>().isKinematic = true;
                 //bone.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 kinematicBones = true;
                 animator.enabled = true;
+                //animator.SetTrigger("InWater");
                 //animator.SetBool("Swimming", true);
                 targetPosition = new Vector3(transform.position.x, waterHeight - .7f, transform.position.z);
             }
         }
-
+        /*if(transform.position.y != waterHeight - .7f) {
+            targetPosition = new Vector3(transform.position.x, waterHeight - .7f, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 0.5f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 10 * Time.deltaTime);
+        }*/
         if( Vector3.Distance(transform.position, targetPosition) > .1 ) {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
@@ -131,12 +146,14 @@ public class Fish : MonoBehaviour
     }
 
     private void Stop() {
+        Debug.Log("Stopping");
         if(kinematicBones) {
             foreach( GameObject bone in boneList) {
                 bone.GetComponent<Rigidbody>().isKinematic = false;
-                GetComponent<Rigidbody>().isKinematic = false;
+                //GetComponent<Rigidbody>().isKinematic = false;
                 kinematicBones = false;
                 animator.enabled = false;
+                //animator.SetTrigger("NotInWater");
             }
         }
     }
@@ -226,7 +243,7 @@ public class Fish : MonoBehaviour
                 }
                 hurtSound.Play(0);
             }
-            Debug.Log("Taking Damage");
+            //Debug.Log("Taking Damage");
         }
     }
 

@@ -79,7 +79,7 @@ public class Bone : MonoBehaviour, IPointerClickHandler
             parent.checkForDamage(true, other.relativeVelocity.magnitude);
             parent.tank = other.transform.root.GetComponent<TankController>();
         }
-        else {
+        else if(other.transform.root.gameObject.tag != "Bone" && other.transform.root.gameObject.tag != "Fish") {
             parent.checkForDamage(false, other.relativeVelocity.magnitude);
         }
     }
