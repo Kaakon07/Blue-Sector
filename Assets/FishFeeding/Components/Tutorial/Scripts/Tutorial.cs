@@ -116,14 +116,18 @@ public class Tutorial : MonoBehaviour
     private void Start()
     {   
         if(StartOnStartup)IndexOfCurrentItem = 0;
+        GameObject[] temp = new GameObject[Items.Length];
+        int counter = 0;
         foreach (var entry in Items)
         {
-            if(entry.GetComponentsInChildren<TutorialEntry>().Length == 0){
-                 ArrayUtility.Remove(ref Items, entry);
+            if(entry.GetComponentsInChildren<TutorialEntry>().Length != 0){
+                 temp[counter] = entry;
             }
             if(entry != Current) entry.gameObject.SetActive(false);
             if(entry == Current) entry.gameObject.SetActive(true);
+            counter++;
         }
+        Items = temp;
 
     }   //For debugging purposes, proceeds to the next tutorial step when the spacebar is pressed
     private void Update(){
