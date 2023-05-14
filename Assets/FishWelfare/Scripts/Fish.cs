@@ -56,6 +56,8 @@ public class Fish : MonoBehaviour
     private float damageInvulnerabilityTimer = 1f;
     public float unsediatedLevel = 1f;
     public TankController tank;
+    public TankController startTank;
+    public TankController endTank;
     //with a sedativeConsentration of 0.01 the sedationTimer will take 5 minutes to count down.
     public float sedationTimer = 3;
 
@@ -117,6 +119,7 @@ public class Fish : MonoBehaviour
         if(isGrabbedCount > 0 && Random.Range(0, 1) < unsediatedLevel && health > 0) {
             health -= 1;
         }
+        findClosestTank();
     }
 
     private void Move() {
@@ -131,6 +134,9 @@ public class Fish : MonoBehaviour
                 //animator.SetTrigger("InWater");
                 //animator.SetBool("Swimming", true);
                 targetPosition = new Vector3(transform.position.x, waterHeight - .7f, transform.position.z);
+                if(unsediatedLevel < .2f) {
+                    transform.position = targetPosition;
+                }
             }
         }
         /*if(transform.position.y != waterHeight - .7f) {
@@ -158,6 +164,17 @@ public class Fish : MonoBehaviour
         }
     }
 
+    private void findClosestTank() {
+        float startdist = Vector3.Distance(startTank.transform.position, transform.position);
+        float endDist = Vector3.Distance(endTank.transform.position, transform.position);
+        if(startdist < endDist) {
+            tank = startTank;
+        }
+        else {
+            tank = endTank;
+        }
+    }
+
     private void updateSedation() {
         if(tank.sedativeConsentration == 0f){
             if(unsediatedLevel < 1f) {
@@ -170,10 +187,10 @@ public class Fish : MonoBehaviour
             } else if(unsediatedLevel < 0f) {
                 unsediatedLevel = 0f;
             }
-            animator.speed = unsediatedLevel;
-            movementSpeed = originalMovementSpeed * unsediatedLevel;
-            rotationSpeed = (originalRotationSpeed * unsediatedLevel) / 1.5f;
         }
+        animator.speed = unsediatedLevel;
+        movementSpeed = originalMovementSpeed * unsediatedLevel;
+        rotationSpeed = (originalRotationSpeed * unsediatedLevel) / 1.5f;
     }
 
     private void followchild() {
