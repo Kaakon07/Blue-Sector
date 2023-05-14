@@ -24,7 +24,7 @@ public class ScreenController : MonoBehaviour
         row.gillDamage.text = fish.GetGillDamageGuessed().ToString() + "/" + fish.GetGillDamage().ToString();
         //row.handling.text = fish.health.ToString();
         row.lice.text =fish.markedLice.ToString() + "/" + fish.GetLiceList().Count;
-        row.score.text = "1";
+        row.score.text = CalculateScore(fish.GetGillDamageGuessed(), fish.GetGillDamage(), fish.markedLice, fish.GetLiceList().Count, fish.health).ToString() + "/30";
         fish.scoreBoardEntry = row;
     }
 
@@ -35,5 +35,34 @@ public class ScreenController : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
+    }
+
+    private int CalculateScore(int guessedGillDamage, int gillDamage, int markedLice, int lice, int handling) {
+        int gillScore = 0;
+        int diff = Mathf.Abs(gillDamage - guessedGillDamage);
+        switch (diff)
+        {
+            case 0:
+                gillScore = 10;
+                break;
+            case 1:
+                gillScore = 8;
+                break;
+            case 2:
+                gillScore = 6;
+                break;
+            case 3:
+                gillScore = 4;
+                break;
+            case 4:
+                gillScore = 2;
+                break;
+            case 5:
+                gillScore = 0;
+                break;
+        }
+        int liceScore = 10 - Mathf.Abs(10 - (markedLice/lice)*10);
+        Debug.Log("Gill score: " + gillScore + " Lice score: " + liceScore + " handling: " + handling);
+        return gillScore + liceScore + handling;
     }
 }

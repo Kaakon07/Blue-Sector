@@ -52,8 +52,8 @@ public class Fish : MonoBehaviour
     private Transform fishbone;
     [HideInInspector]
     public RowUi scoreBoardEntry;
-    private bool damageInvulerability = false;
-    public float damageInvulnerabilityTimer = 1f;
+    private bool damageInvulerability = true;
+    private float damageInvulnerabilityTimer = 1f;
     public float unsediatedLevel = 1f;
     public TankController tank;
     //with a sedativeConsentration of 0.01 the sedationTimer will take 5 minutes to count down.
@@ -104,6 +104,9 @@ public class Fish : MonoBehaviour
     void PeriodicUpdates() {
         if(isInWaterCount > 0 && isGrabbedCount <= 0){
             SetMoveTarget();    
+        }
+        if(isGrabbedCount > 0 && Random.Range(0, 1) < unsediatedLevel && health > 0) {
+            health -= 1;
         }
     }
 
