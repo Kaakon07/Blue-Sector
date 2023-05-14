@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RatingInterfaceController : MonoBehaviour
 {
 
-    private bool active = false;
+    private bool active = true;
     private List<ButtonController> buttons = new List<ButtonController>();
     private Fish fish = null;
 

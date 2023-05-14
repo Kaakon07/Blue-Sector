@@ -16,6 +16,7 @@ public class InspectionTaskManager : MonoBehaviour
     private ScreenController screenController;
     [SerializeField]
     private List<Fish> fishList = new List<Fish>();
+    public RatingInterfaceController ratingInterfaceController;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,10 @@ public class InspectionTaskManager : MonoBehaviour
     }
 
     public void SetSelectedFish(Fish fish){
-        selectedFish = fish;
+        if(selectedFish != fish) {
+            selectedFish = fish;
+            ratingInterfaceController.SyncButtons(null);
+        }
         //Debug.Log("Gilldamage: " + selectedFish.GetGillDamage());
     }
 
