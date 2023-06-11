@@ -18,6 +18,8 @@ public class InspectionTaskManager : MonoBehaviour
     private List<Fish> fishList = new List<Fish>();
     public RatingInterfaceController ratingInterfaceController;
 
+    public LiceInterfaceController liceInterfaceController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,7 @@ public class InspectionTaskManager : MonoBehaviour
         if(selectedFish != fish) {
             selectedFish = fish;
             ratingInterfaceController.SyncButtons(null);
+            liceInterfaceController.SetLice(selectedFish.markedLice);
         }
         //Debug.Log("Gilldamage: " + selectedFish.GetGillDamage());
     }
@@ -63,6 +66,11 @@ public class InspectionTaskManager : MonoBehaviour
             selectedFish.SetgillDamageGuessed(guess);
         }
         //Debug.Log("Guess: " + selectedFish.GetGillDamageGuessed());
+    }
+
+    public void SetLiceCount() {
+        selectedFish.markedLice = (int)liceInterfaceController.liceSlider.value;
+        liceInterfaceController.CountLice();
     }
 
     public List<Fish> GetInspectedFish() {

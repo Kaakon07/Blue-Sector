@@ -24,7 +24,7 @@ public class ScreenController : MonoBehaviour
         row.gillDamage.text = fish.GetGillDamageGuessed().ToString() + "/" + fish.GetGillDamage().ToString();
         //row.handling.text = fish.health.ToString();
         row.lice.text =fish.markedLice.ToString() + "/" + fish.GetLiceList().Count;
-        row.score.text = CalculateScore(fish.GetGillDamageGuessed(), fish.GetGillDamage(), fish.markedLice, fish.GetLiceList().Count, fish.health).ToString() + "/30";
+        row.score.text = CalculateScore(fish.GetGillDamageGuessed(), fish.GetGillDamage(), fish.markedLice, fish.numberOfLice, fish.health).ToString() + "/30";
         fish.scoreBoardEntry = row;
     }
 

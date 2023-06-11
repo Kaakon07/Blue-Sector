@@ -39,6 +39,8 @@ public class Fish : MonoBehaviour
     public GameObject lastMarkedLouse;
     [HideInInspector]
     public int markedLice = 0;
+
+    public int numberOfLice = 5;
     public int health = 10;
     private AudioSource hurtSound;
     [HideInInspector]
