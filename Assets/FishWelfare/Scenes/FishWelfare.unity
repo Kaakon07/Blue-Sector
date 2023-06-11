@@ -623,8 +623,8 @@ PrefabInstance:
       propertyPath: TextContent
       value: "Se etter misfarging eller hvite flekker p\xE5 gjellene til fisken.
         1 er litt misfarging og 5 er mye. Om gjellene ser friske ut trenger du ikke
-        gi en score. \nTell ogs\xE5 lus p\xE5 fisken med \xE5 trykke p\xE5 de p\xE5
-        samme m\xE5te som du trykker p\xE5 knapper (H\xF8yre avtrekker)."
+        gi en score. \nTell ogs\xE5 lakselus p\xE5 fisken. De ser ut som brune flekker
+        p\xE5 skinnet."
       objectReference: {fileID: 0}
     - target: {fileID: 1811096760538960403, guid: 92ea51f4cb373d04dbc19525a59549b9,
         type: 3}
