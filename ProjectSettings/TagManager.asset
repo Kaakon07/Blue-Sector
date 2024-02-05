@@ -21,6 +21,10 @@ TagManager:
   - Water
   - BoatTransitionToWelfare
   - BoatTransitionToFeeding
+  - InstrCanvas
+  - Shovel
+  - Bucket
+  - Merd
   layers:
   - Default
   - TransparentFX
@@ -32,7 +36,6 @@ TagManager:
   - Merd
   - UnderwaterShade
   - Grabbable
-  - 
   - 
   - 
   - 
