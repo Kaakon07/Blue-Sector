@@ -4,32 +4,52 @@ using UnityEngine;
 
 public class FillFood : MonoBehaviour
 {
-public Transform merd;
-private GameObject food;
+
+public GameObject spawnPellet;
+// private List<GameObject> food= new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-      this.food=gameObject.transform.GetChild(0).gameObject;
+    //   this.food=gameObject.transform.GetChild(0).gameObject;
+        // int children = gameObject.transform.childCount;
+        // for(int i = 0; i < children; ++i){
+        //     food.Add(gameObject.transform.GetChild(i).gameObject);
+        
     }
 
     // Update is called once per frame
 
     void OnCollisionEnter(Collision collision){
+     
+        // for(int i = 0; i < children; ++i){
+        GameObject foods = transform.GetChild(0).gameObject;
         if (collision.gameObject.tag=="Bucket"){
-        food.SetActive(true);
+                foods.SetActive(true);}
+        
+        if (collision.gameObject.tag=="Merd"){
+           foods.SetActive(false);
+           
+           
+            Instantiate(spawnPellet,  new Vector3( transform.position.x, transform.position.y,  transform.position.z), Quaternion.identity);
+            spawnPellet.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10f, 0));
+            
+            
+
+            //  Rigidbody rb = child.GetComponent<Rigidbody>();
+            //   rb.isKinematic = false;
+            // rb.detectCollisions = true;
+            // 
+            // rb.AddForce(throwForce);
         }
         
-    }
+         
+           }
+    
     void Update()
     {
-float radius=20f;
-    Vector3 shovelPosition= new Vector3(transform.position.x,0f, transform.position.z);
-    Vector3 merdPosition= new Vector3(merd.position.x, 0f, merd.position.z);
-    float distanceCenter= Vector3.Distance(shovelPosition,merdPosition);
-    Debug.Log(shovelPosition);
-    if(distanceCenter>=radius-3f && distanceCenter<=radius+3f){
-        food.SetActive(false);
+
        
+    
     }
-    }
+
 }
