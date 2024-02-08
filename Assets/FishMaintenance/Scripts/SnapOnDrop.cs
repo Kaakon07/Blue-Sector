@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class SnapOnDrop : MonoBehaviour
 {
+    private BNG.Grabbable grabbable;
+    public BNG.SnapZone snapZone;
 
     public Transform targetPosition;
-    private BNG.Grabbable grabbable;
-    private BNG.ReturnToSnapZone snapReturn;
-    private float snapRadius=1.5f;
+    private BNG.Grabber grabber;
+    // private BNG.ReturnToSnapZone snapReturn;
 
     // Start is called before the first frame update
     void Start()
     {
         grabbable= GetComponent<BNG.Grabbable>();
-        snapReturn= GetComponent<BNG.ReturnToSnapZone>();
+        grabber=grabbable.GetPrimaryGrabber();
     }
-
     // Update is called once per frame
-    void Update()
-    {
-        float distanceTarget=Vector3.Distance(transform.position,targetPosition.position);
-        if (distanceTarget<=snapRadius){
-            // grabbable.DropItem(grabbable.GetPrimaryGrabber());
-            // snapReturn.moveToSnapZone();
-        }
-    }
-
-    private void SnapToTargetPosition(){
-        transform.position=targetPosition.position;
-        transform.rotation=targetPosition.rotation;
-        
+    void Update(){
+    // Debug.Log("dist"+ Vector3.Distance(transform.position, targetPosition.position));
+    // Debug.Log("player: " + grabbable.GetPrimaryGrabber());
+    //   if (Vector3.Distance(transform.position, targetPosition.position)<10f ){
+    //         grabber.RemoveValidGrabbable(grabbable);
+    //         grabbable.DropItem(true,true);
+    //         grabbable.ResetGrabbing();
+    //         grabber.AddValidGrabbable(grabbable);
+    //         // snapZone.GrabGrabbable(grabbable);
+    // }
     }
 }
