@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 5559486540497818843}
   - component: {fileID: 6483002135902064214}
   - component: {fileID: 5239045445054119813}
+  - component: {fileID: 7064427980285413869}
   m_Layer: 5
   m_Name: TaskEntry
   m_TagString: Untagged
@@ -284,6 +285,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7064427980285413869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185532854147602977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238d9d1bbbba51f4aaeeadee8334cd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completedColor: {r: 0.040673774, g: 0.6226415, b: 0, a: 0}
+  checkmark: {fileID: 3987827498643230569}
+  textBox: {fileID: 5965678270046332146}
+  btn: {fileID: 5239045445054119813}
 --- !u!1 &3987827498643230569
 GameObject:
   m_ObjectHideFlags: 0
