@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FishMaintenance
   m_EditorClassIdentifier: 
   _taskName: Fish Maintenance
-  _description: 
+  _description: Everyhing clean maintenance wash wash fish runde paa ring
   _autocompleate: 0
   _subtasks:
   - {fileID: 11400000, guid: 460719563e9151043b9560f05f152682, type: 2}
