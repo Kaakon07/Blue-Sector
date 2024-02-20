@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 491754325381637655, guid: 9472e1e84466c214691916977cb73cbe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 491754325400953991, guid: 9472e1e84466c214691916977cb73cbe,
         type: 3}
       propertyPath: m_IsActive
@@ -454,6 +459,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3294812459597160604, guid: 9472e1e84466c214691916977cb73cbe,
+        type: 3}
+      propertyPath: m_text
+      value: Lorem ipsum dolor sic amet. Lorem ipsum dolor sic amet. Lorem ipsum
+        dolor sic amet. Lorem ipsum dolor sic amet.
       objectReference: {fileID: 0}
     - target: {fileID: 4615112236045618305, guid: 9472e1e84466c214691916977cb73cbe,
         type: 3}

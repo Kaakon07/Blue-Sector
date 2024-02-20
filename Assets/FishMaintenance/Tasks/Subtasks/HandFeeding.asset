@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HandFeeding
   m_EditorClassIdentifier: 
   _subtaskName: Hand Feeding
-  _description: 
+  _description: Feed fish
   _autocompleate: 0
   _stepList:
   - _stepName: Collect bucket
