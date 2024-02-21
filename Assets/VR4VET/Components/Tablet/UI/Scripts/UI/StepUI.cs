@@ -8,7 +8,7 @@ public class StepUI : MonoBehaviour
     [SerializeField] GameObject checkmark;
     [SerializeField] TextMeshProUGUI txt_name;
     [SerializeField] TextMeshProUGUI txt_description;
-
+    [SerializeField] TextMeshProUGUI txt_stepNumber;
     private SubTask associatedSubTask;
     private string _name;
     private string _desc;
