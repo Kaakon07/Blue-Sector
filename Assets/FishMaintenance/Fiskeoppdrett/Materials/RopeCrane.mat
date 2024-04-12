@@ -36,5 +36,5 @@ Material:
     m_Floats:
     - _Parallax: 0.0293
     m_Colors:
-    - _Color: {r: 0.6084906, g: 1, b: 0.8760694, a: 0.8352941}
+    - _Color: {r: 0.896094, g: 0.6933962, b: 1, a: 0.8352941}
   m_BuildTextureStacks: []
