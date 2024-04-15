@@ -285,6 +285,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 491754326897251116, guid: 9472e1e84466c214691916977cb73cbe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 491754327088367302, guid: 9472e1e84466c214691916977cb73cbe,
         type: 3}
       propertyPath: m_Pivot.x
@@ -474,6 +479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 32.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768017390567177314, guid: 9472e1e84466c214691916977cb73cbe,
+        type: 3}
+      propertyPath: m_text
+      value: Click on a badge to see how it can be unlocked
       objectReference: {fileID: 0}
     - target: {fileID: 6768017390567177314, guid: 9472e1e84466c214691916977cb73cbe,
         type: 3}

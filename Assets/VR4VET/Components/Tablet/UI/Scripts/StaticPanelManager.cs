@@ -162,7 +162,7 @@ public class StaticPanelManager : MonoBehaviour
         // TXT_Help_Exp.text = "Help - " + b;
 
 
-        TXT_TaskAbout_Exp.text = "Oppgaver - " + b;
+        TXT_TaskAbout_Exp.text = "Maintenance - Task List";
     }
 
     void SwitchMenuTo(GameObject b)
@@ -198,7 +198,7 @@ public class StaticPanelManager : MonoBehaviour
     }
     public void OnClickMenuSkills()
     {
-        TXT_Skill_Exp.text = "Dine Ferdigheter";
+        TXT_Skill_Exp.text = "Skills";
         SwitchMenuTo(SkillListMenu);
 
 

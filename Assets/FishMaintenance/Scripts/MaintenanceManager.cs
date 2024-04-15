@@ -18,7 +18,7 @@ public class MaintenanceManager : MonoBehaviour
     public UnityEvent<Task.Step?> BadgeChanged { get; } = new();
     public UnityEvent<Task.Skill?> SkillCompleted { get; } = new();
     public UnityEvent TaskCompleted { get; } = new();
-
+    private bool twentySeconds = false;
 
     // Start is called before the first frame update
     private void Awake()
@@ -54,6 +54,12 @@ public class MaintenanceManager : MonoBehaviour
 
     }
 
+    public void lynetEnabled(bool passed)
+    {
+        twentySeconds = passed;
+    }
+
+
 
     public void CompleteStep(string subtaskName, string stepName)
     {
@@ -70,7 +76,11 @@ public class MaintenanceManager : MonoBehaviour
             PlayAudio(success);
             stepCount += 1;
             feedbackManager.emptyInstructions();
-            BadgeChanged.Invoke(step);
+            if (subtaskName == "Runde På Ring" && twentySeconds)
+            {
+                Task.Step badgeStep = GetStep("Runde På Ring", stepName);
+                BadgeChanged.Invoke(badgeStep);
+            }
         }
         if (sub.Compleated())
         {

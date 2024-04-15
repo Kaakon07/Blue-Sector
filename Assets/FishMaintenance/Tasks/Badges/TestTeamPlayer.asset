@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestTeamPlayer
   m_EditorClassIdentifier: 
   _name: Lagspiller
-  _instruction: Dette merket er ikke i bruk
+  _instruction: Badge not in use
   _icon: {fileID: 21300000, guid: 6505f6eab355dc44fa1b9ead42a94db9, type: 3}

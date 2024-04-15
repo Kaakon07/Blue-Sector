@@ -24,9 +24,25 @@ public class HUDMessage : MonoBehaviour
     }
 
 
+    public string GetEnglishBadgeName(string name)
+    {
+        if (name == "Tilpasningsdyktig")
+        {
+            return "Adaptable";
+        }
+        if (name == "Kommunikasjon")
+        {
+            return "Communicative";
+        }
+        if (name == "Problemløsning")
+        {
+            return "Problem Solving";
+        }
+        return "";
+    }
     public void EnableSkillDisplay(Task.Skill skill)
     {
-        skillText.text = skill.Name;
+        skillText.text = GetEnglishBadgeName(skill.Name);
         badge.GetComponent<UnityEngine.UI.Image>().sprite = skill.ConnectedBadges[0].Icon;
         StartCoroutine(FadeAnimation());
     }

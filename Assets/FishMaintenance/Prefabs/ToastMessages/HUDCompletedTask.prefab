@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Alle oppgaver fullf\xF8rt"
+  m_text: All tasks completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -393,6 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebf79861657f80479ce3d3324c77954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  confettiGroup: {fileID: 0}
+  finished: {fileID: 0}
 --- !u!1 &4558838578799252456
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,7 +5244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.048000336, y: 9.063}
+  m_AnchoredPosition: {x: 0.7900009, y: 9.063}
   m_SizeDelta: {x: 84.907, y: 14.953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3199097517350497499
@@ -5272,7 +5275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Kanonbra!
+  m_text: Well Done!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

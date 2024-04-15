@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Observant
   m_EditorClassIdentifier: 
   _name: Skarpsyn
-  _instruction: "Se p\xE5 alle 360 videoer"
+  _instruction: Watch all 360 videos
   _icon: {fileID: 21300000, guid: 1770681e2721c7f478806d085346541d, type: 3}

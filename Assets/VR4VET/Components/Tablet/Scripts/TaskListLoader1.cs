@@ -148,7 +148,7 @@ namespace Tablet
 
                 // Set title to be name of this skill
                 TMP_Text skillName = skillBadgesContent.transform.Find("Txt_SkillName").GetComponent<TMP_Text>();
-                skillName.text = skill.Name;
+                skillName.text = GetEnglishName(skill.Name, "skill");
 
                 // Find Horizontal list to place badges
                 GameObject BadgesList = skillBadgesContent.transform.Find("List_Badges").gameObject;
@@ -217,7 +217,7 @@ namespace Tablet
                 startDisplay.SetActive(false);
                 badgeDisplay.SetActive(true);
             }
-            _badgeName.text = badge.Name;
+            _badgeName.text = GetEnglishName(badge.Name, "badge");
             _badgeInstructions.text = badge.Instruction;
             _displayBadge.sprite = badge.Icon;
         }
@@ -276,6 +276,106 @@ namespace Tablet
             // refreshing after adding the new elements for the Page loader to set the pages correctly
         }
 
+
+
+        public string GetEnglishName(string name, string type)
+        {
+            if (type == "subtask")
+            {
+                if (name == "Hent Utstyr")
+                {
+                    return "Get Equipment";
+                }
+                if (name == "Runde På Ring")
+                {
+                    return "Fish Cage Check";
+                }
+                if (name == "Håndforing")
+                {
+                    return "Hand Feeding";
+                }
+                if (name == "Pause")
+                {
+                    return "Break";
+                }
+            }
+            else if (type == "step")
+            {
+                if (name == "Reparer tau på merd")
+                {
+                    return "Repair rope on fish cage";
+                }
+                if (name == "Legg til tau på merd")
+                {
+                    return "Add rope to fish cage";
+                }
+                if (name == "Legg til splinter på kjetting")
+                {
+                    return "Add splinters to chain";
+                }
+                if (name == "Kast mat til fisken")
+                {
+                    return "Feed the fish";
+                }
+                if (name == "Snakk med Laila")
+                {
+                    return "Talk to Laila";
+                }
+                // Hent bøtte og spade, Hent tau, Hent splinter
+                if (name == "Hent bøtte og spade")
+                {
+                    return "Get bucket and shovel";
+                }
+                if (name == "Hent tau")
+                {
+                    return "Get rope";
+                }
+                if (name == "Hent splinter")
+                {
+                    return "Get splinter";
+                }
+            }
+            else if (type == "skill")
+            {
+                if (name == "Tilpasningsdyktig")
+                {
+                    return "Adaptable";
+                }
+                if (name == "Kommunikasjon")
+                {
+                    return "Communicative";
+                }
+                if (name == "Problemløsning")
+                {
+                    return "Problem Solving";
+                }
+            }
+            // Create english variant for badges: Lynet, Skarpsyn, Stålvilje, Stegmester
+            else if (type == "badge")
+            {
+                if (name == "Nyskjerrigper")
+                {
+                    return "Curious";
+                }
+                if (name == "Lynet")
+                {
+                    return "Quick";
+                }
+                if (name == "Skarpsyn")
+                {
+                    return "Sharp Vision";
+                }
+                if (name == "Stålvilje")
+                {
+                    return "Strong willed";
+                }
+                if (name == "Stegmester")
+                {
+                    return "Step master";
+                }
+            }
+            return "";
+        }
         //gets called on Start since the list of task is always the same
         public void LoadTaskPage()
         {
@@ -343,10 +443,6 @@ namespace Tablet
             foreach (Task.Subtask sub in task.Subtasks)
             {
 
-                if (sub.SubtaskName == "Pause")
-                {
-                    continue;
-                }
                 //task for the list
                 GameObject item = Instantiate(_subtaskListEntry, Vector3.zero, Quaternion.identity);
                 item.transform.SetParent(TaskSubtaskContent.transform);
@@ -356,7 +452,7 @@ namespace Tablet
 
                 TMP_Text caption = item.transform.Find("txt_SubTaskNr").GetComponent<TMP_Text>();
                 // GameObject points = item.transform.Find("PointText").gameObject; points for later
-                caption.text = sub.SubtaskName;
+                caption.text = GetEnglishName(sub.SubtaskName, "subtask");
 
                 Button button = item.transform.Find("btn_SubTask").GetComponent<Button>();
                 GameObject completedButton = item.transform.Find("btn_SubTaskComplete").gameObject;
@@ -366,6 +462,7 @@ namespace Tablet
                     checkmark.SetActive(true);
                     completedButton.SetActive(true);
                     button = item.transform.Find("btn_SubTaskComplete").GetComponent<Button>();
+                    caption.text = GetEnglishName(sub.SubtaskName, "subtask");
                 };
                 button.onClick.AddListener(() => SubTaskPageLoader(sub));
             }
@@ -382,7 +479,7 @@ namespace Tablet
             TaskPageCanvas.SetActive(false);
             subtaskPageCanvas.SetActive(true);
 
-            _subtaskNameTab.GetComponent<TMP_Text>().text = subtask.SubtaskName;
+            _subtaskNameTab.GetComponent<TMP_Text>().text = GetEnglishName(subtask.SubtaskName, "subtask");
             _subtaskAboutTab.GetComponent<TMP_Text>().text = subtask.Description;
 
             //cleaning list before loading the new subtasks
@@ -408,7 +505,7 @@ namespace Tablet
                     standardStep.SetActive(false);
                 };
                 TMP_Text caption = item.transform.Find("txt_Desc").GetComponent<TMP_Text>();
-                caption.text = step.StepName;
+                caption.text = GetEnglishName(step.StepName, "step");
 
                 TMP_Text reps = item.transform.Find("txt_repetitionNr").GetComponent<TMP_Text>();
                 if (step.RepetionNumber > 1) reps.text = step.RepetionsCompleated + "/" + step.RepetionNumber;

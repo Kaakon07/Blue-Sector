@@ -82,6 +82,7 @@ public class FeedbackManager : MonoBehaviour
         }
     }
 
+
     IEnumerator moreFeedback(string subtaskName)
     {
         yield return new WaitForSeconds(20f);
@@ -96,22 +97,24 @@ public class FeedbackManager : MonoBehaviour
         else if (subtaskName == "Reparer tau på merd" && !manager.GetStep("Runde På Ring", subtaskName).IsCompeleted())
         {
             watch.addInstructions(feedback[subtaskName][1]);
+            manager.lynetEnabled(false);
         }
         else if (subtaskName == "Legg til tau på merd" && !manager.GetStep("Runde På Ring", "Reparer tau på merd").IsCompeleted())
         {
             watch.addInstructions(feedback[subtaskName][1]);
+            manager.lynetEnabled(false);
         }
         else if (subtaskName == "Legg til splinter på kjetting" && !manager.GetStep("Runde På Ring", "Reparer tau på merd").IsCompeleted() && !manager.GetStep("Runde På Ring", "Legg til tau på merd").IsCompeleted())
         {
             watch.addInstructions(feedback[subtaskName][1]);
+            manager.lynetEnabled(false);
         }
-        if (subtaskName != "Håndforing" && subtaskName != "Hent Utstyr")
-        {
-            Task.Step badgeStep=manager.GetStep("Runde På Ring", subtaskName);
-            if(badgeStep.IsCompeleted()) manager.BadgeChanged.Invoke(badgeStep);
-        }
+        // if (subtaskName != "Håndforing" && subtaskName != "Hent Utstyr")
+        // {
+        //     Task.Step badgeStep=manager.GetStep("Runde På Ring", subtaskName);
+        //     if(badgeStep.IsCompeleted()) manager.BadgeChanged.Invoke(badgeStep);
+        // }
     }
-
     IEnumerator emergencyFeedback(string subtaskName)
     {
         yield return new WaitForSeconds(40f);

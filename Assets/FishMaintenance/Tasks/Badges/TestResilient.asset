@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestResilient
   m_EditorClassIdentifier: 
   _name: "St\xE5lvilje"
-  _instruction: Dette merket er ikke i bruk
+  _instruction: Badge not in use
   _icon: {fileID: 21300000, guid: d69ae2b3092d67941bb42f5dfe16845f, type: 3}

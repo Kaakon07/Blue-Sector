@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Lightning
   m_EditorClassIdentifier: 
   _name: Lynet
-  _instruction: "Fullf\xF8r en runde p\xE5 ring oppgave under 20 sekund"
+  _instruction: Complete a Fish Cage Check subtask under 20 seconds
   _icon: {fileID: 21300000, guid: 3e657dbfc7f710844afaa30d29124fc7, type: 3}

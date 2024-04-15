@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Stepwise
   m_EditorClassIdentifier: 
   _name: Stegmester
-  _instruction: "Fullf\xF8r de 3 f\xF8rste oppgavene i teleportasjonsankernes rekkef\xF8lge"
+  _instruction: Complete the 3 first tasks on the fish cage in the order of their
+    teleportation anchors
   _icon: {fileID: 21300000, guid: be986404f84818b4c86ff094a8f32a6a, type: 3}
