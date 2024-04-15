@@ -15,51 +15,51 @@ public class FeedbackManager : MonoBehaviour
         feedback = new Dictionary<string, List<string>>();
         manager.SubtaskChanged.AddListener(feedbackOnTaskComplete);
         feedback.Add("Hent Utstyr", new List<string> {
-            "Ta med deg utstyr.",
-            "Berør utstyret for å ta det med deg.",
-            "Bra jobba! Gå videre til neste sylinder.",
+            "Grab equipment.",
+            "Touch equipment to bring it with you.",
+            "Good job! Move on to the next cylinder.",
             "",
             ""
         });
         feedback.Add("Håndforing", new List<string> {
-            "Kast mat til fisken 5 ganger. Se video fra anlegget.",
+            "Throw food to the fish 5 times. See video from the facility.",
             "",
-            "Kjempebra, dette var en utfordrende oppgave!",
-            "Hent BØTTE OG SPADE på båten for å starte denne oppgaven",
-            "Bruk spaden til å hente mat fra bøtten. Kast så maten i merden."
+            "Well done, this was a challenging task!",
+            "Fetch BUCKET AND SHOVEL from the boat to start this task.",
+            "Use the shovel to grab food from the bucket. Throw the food into the fish cage."
         });
         feedback.Add("Legg til tau på merd", new List<string> {
-            "Legg til det manglende tauet.",
-            "Berør omrisset med tauet du har i venstre hånd.",
+            "Add the missing rope.",
+            "Touch the outline with the rope you have in your right hand.",
             "",
-            "Hent TAU på båten for å starte denne oppgaven",
+            "Fetch ROPE from the boat to start this task.",
             ""
         });
         feedback.Add("Legg til splinter på kjetting", new List<string> {
-            "Legg til splinten i kjettingen.",
-            "Berør omrisset med splinten du har i venstre hånd.",
+            "Add the missing splint to the chains.",
+            "Touch the outline on the ground with the splint you have in your right hand.",
             "",
-            "Hent SPLINT på båten for å starte denne oppgaven",
-            "Berør omrisset på bakken med splinten du har i venstre hånd. Dette klarer du!"
+            "Fetch SPLINT on the boat to start this task.",
+            "Touch the outline on the ground with the splint you have in your right hand. You can do this!"
         });
         feedback.Add("Reparer tau på merd", new List<string> {
-            "Bytt ut det gamle tauet.",
-            "Berør det utslitte tauet med tauet du har i venstre hånd.",
+            "Replace the bad rope.",
+            "Touch the bad rope with the rope you have in your right hand.",
             "",
-            "Hent TAU på båten for å starte denne oppgaven",
-            "Berør det utslitte tauet med tauet du har i venstre hånd. Dette klarer du!"
+            "Fetch ROPE from the boat to start this task.",
+            "Touch the bad rope with the rope you have in your right hand. You can do this!"
         });
         feedback.Add("Runde På Ring", new List<string> {
             "",
             "",
-            "Bra, nå er merden kontrollert.",
+            "Good job, the fish cage is maintained.",
             "",
             ""
         });
         feedback.Add("Pause", new List<string> {
             "",
             "",
-            "Bra jobba!",
+            "Well done!",
             "",
             ""
         });

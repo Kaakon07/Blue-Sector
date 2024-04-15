@@ -152,7 +152,7 @@ public class DialogueBoxController : MonoBehaviour
                 // manager.PlaySuccess();
             }
             _dialogueText.text = dialogueTree.sections[section].dialogue[i];
-            PlayAudio(dialogueTree.sections[section].dialogueAudio[i]);
+            TTSSpeaker.GetComponent<TTSSpeaker>().Speak(_dialogueText.text);
             while (!_skipLineTriggered)
             {
                 _skipLineButton.SetActive(true);
@@ -169,7 +169,7 @@ public class DialogueBoxController : MonoBehaviour
             yield break;
         }
         _dialogueText.text = dialogueTree.sections[section].branchPoint.question;
-        PlayAudio(dialogueTree.sections[section].branchPoint.questionAudio);
+        TTSSpeaker.GetComponent<TTSSpeaker>().Speak(_dialogueText.text);
         ShowAnswers(dialogueTree.sections[section].branchPoint);
         while (_answerTriggered == false)
         {
