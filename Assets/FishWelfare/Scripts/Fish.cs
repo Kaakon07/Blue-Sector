@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Task;
 //using System.Diagnostics;
 
 public class Fish : MonoBehaviour
@@ -75,6 +76,8 @@ public class Fish : MonoBehaviour
     private float transitionToAnimationTime;
     private Vector3 transitionToAnimationPosition;
     private List<Vector3> transitionToAnimationBonesPosition = new List<Vector3> ();
+    TaskHolder TH;
+    public Transform THT;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +98,7 @@ public class Fish : MonoBehaviour
         originalMovementSpeed = movementSpeed;
         originalRotationSpeed = rotationSpeed;
         findClosestTank();
+        TH = THT.GetComponent<TaskHolder>();
     }
 
     // using LateUpdate instead of Update because corrective maneuvers in Move() need happen after physics is processed
@@ -105,6 +109,7 @@ public class Fish : MonoBehaviour
         followchild();
         if (isGrabbedCount > 0 || !IsInWater())
             Stop();
+            TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + id).GetStep("Pick up the fish").CompleateRep();
         if (IsInWater() && isGrabbedCount <= 0)
             Move();
 
@@ -231,6 +236,7 @@ public class Fish : MonoBehaviour
             else if (unsediatedLevel < 0f)
             {
                 unsediatedLevel = 0f;
+                TH.GetTask("Health Inspection").GetSubtask("Apply Anesthetic").GetStep("Wait for fish to calm down").CompleateRep();
             }
         }
         animator.speed = unsediatedLevel >= 0 ? unsediatedLevel : 0;

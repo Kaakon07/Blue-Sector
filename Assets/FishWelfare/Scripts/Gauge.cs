@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
-    private Slider measuringGauge;
+    public Slider measuringGauge;
     private TankController tankController;
     // Start is called before the first frame update
     void Start()

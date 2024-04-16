@@ -21,6 +21,9 @@ public class InspectionTaskManager : MonoBehaviour
 
     public LiceInterfaceController liceInterfaceController;
 
+    TaskHolder TH;
+    public Transform THT;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class InspectionTaskManager : MonoBehaviour
         screenController = GameObject.FindObjectOfType<ScreenController>();
         inspectionTarget = fishList.Count;
         selectedFish = fishList[0];
+        TH = THT.GetComponent<TaskHolder>();
     }
 
     public void ProgressInspection(Fish fish) 
@@ -39,6 +43,10 @@ public class InspectionTaskManager : MonoBehaviour
                 screenController.DrawScreen(fish);
             } else {
                 screenController.DrawScreen(fish);
+            }
+            if(TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Put fish in the wake up tank").CompleatedPercent() < 100f)
+            {
+                TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Put fish in the wake up tank").CompleateRep();
             }
         }   
     }
@@ -65,6 +73,10 @@ public class InspectionTaskManager : MonoBehaviour
         }
         else {
             selectedFish.SetgillDamageGuessed(guess);
+            if(TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Give fish a rating").CompleatedPercent() < 100f)
+            {
+                TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Give fish a rating").CompleateRep();
+            }
         }
         //Debug.Log("Guess: " + selectedFish.GetGillDamageGuessed());
     }
