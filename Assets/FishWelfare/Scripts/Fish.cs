@@ -13,7 +13,7 @@ public class Fish : MonoBehaviour
     [SerializeField]
     private int gillDamageGuessed = 0;
     [SerializeField]
-    private int id;
+    public int id;
     [HideInInspector]
     public Vector3 waterBodyCenter;
     private Vector3 targetPosition;
@@ -108,8 +108,10 @@ public class Fish : MonoBehaviour
         //Debug.Log(isGrabbedCount);
         followchild();
         if (isGrabbedCount > 0 || !IsInWater())
+        {
             Stop();
             TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + id).GetStep("Pick up the fish").CompleateRep();
+        }
         if (IsInWater() && isGrabbedCount <= 0)
             Move();
 

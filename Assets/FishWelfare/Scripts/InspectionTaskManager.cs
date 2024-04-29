@@ -44,10 +44,7 @@ public class InspectionTaskManager : MonoBehaviour
             } else {
                 screenController.DrawScreen(fish);
             }
-            if(TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Put fish in the wake up tank").CompleatedPercent() < 100f)
-            {
-                TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Put fish in the wake up tank").CompleateRep();
-            }
+            TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)fish.id).GetStep("Put fish in the wake up tank").CompleateRep();
         }   
     }
 
@@ -73,10 +70,7 @@ public class InspectionTaskManager : MonoBehaviour
         }
         else {
             selectedFish.SetgillDamageGuessed(guess);
-            if(TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Give fish a rating").CompleatedPercent() < 100f)
-            {
-                TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)inspectionTarget).GetStep("Give fish a rating").CompleateRep();
-            }
+            TH.GetTask("Health Inspection").GetSubtask("Inspect fish #" + (int)selectedFish.id).GetStep("Give fish a rating").CompleateRep();
         }
         //Debug.Log("Guess: " + selectedFish.GetGillDamageGuessed());
     }
